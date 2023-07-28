@@ -53,15 +53,13 @@ export class Calendar extends Component {
             <tbody>
               {monthData.map((week, index) =>
               <tr key={index}>
-                {week.map((date, index) => date ?
+                {week.map((date, index) => 
                 <td 
                 key={index} 
-                className={classnames({
+                className={classnames({ 
                   "ui-datepicker-today": areEqual(date, currentDate),
                 })}
                 >{date.getDate()}</td>
-                :
-                <td key={index} className="ui-datepicker-other-month"></td>
                 )}
               </tr>
               )}                

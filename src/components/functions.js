@@ -20,7 +20,7 @@ const Month = {
 };
 
 export function areEqual(a, b) {
-    if (!a || !b) return false;
+    if (!a || !b) return false;    
 
     return (
         a.getFullYear() === b.getFullYear() &&
@@ -55,24 +55,32 @@ function getDayOfWeek(date) {
 export default function getMonthData(year, month) {
     const result = [];
 
-    const date = new Date(year, month);
-    const daysInMonth = getDaysInMonth(date);
-    const monthStartsOn = getDayOfWeek(date);
+    const prevMonthDate = new Date(year, month - 1); // Предыдущий месяц    
+    const currentDate = new Date(year, month); // Текущий месяц    
+    // const nextMonthDate = new Date(year, month + 1); // Следующий месяц        
 
+    const prevMonthDays = getDaysInMonth(prevMonthDate);    
+    const currentMonthDays = getDaysInMonth(currentDate) - 1;   
+    const monthStartsOn = getDayOfWeek(currentDate);    
 
-    let day = 1;
+    let day = prevMonthDays - monthStartsOn + 1;    
 
-    for (let i = 0; i < (daysInMonth + monthStartsOn) / DAYS_IN_WEEK; i++) {
+    for (let i = 0; i < 6; i++) {
         result[i] = [];
-
+    
         for (let j = 0; j < DAYS_IN_WEEK; j++) {
-            if ((i === 0 && j < monthStartsOn) || day > daysInMonth) {
-                result[i][j] = undefined;
-            } else {
-                result[i][j] = new Date(year, month, day++);
-            }
+          if (i === 0 && j < monthStartsOn) {
+            // Дни предыдущего месяца
+            result[i][j] = new Date(year, month - 1, day++);
+          } else if (day <= currentMonthDays) {
+            // Дни текущего месяца
+            result[i][j] = new Date(year, month, day++);
+          } else {
+            // Дни следующего месяца
+            result[i][j] = new Date(year, month + 1, day++ - currentMonthDays);
+          }
         }
-    }
+      }
 
     return result;
 }
