@@ -1,6 +1,6 @@
 import { Calendar } from "./components/Calendar";
 import './App.css';
-import {HashRouter} from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 const now = new Date();
 

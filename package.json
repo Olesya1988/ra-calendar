@@ -19,8 +19,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-  },
-  "homepage": "https://Olesya1988.github.io/ra-calendar",
+  },  
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -40,6 +39,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^5.0.0"
-  }
+    "gh-pages": "^5.0.0",
+    "react-router-dom": "^6.14.2"
+  },
+  "homepage": "https://Olesya1988.github.io/ra-calendar"
 }
